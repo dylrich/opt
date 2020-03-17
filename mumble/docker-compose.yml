@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+
+  mumble:
+    container_name: mumble
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VERSION: 1.3.0
+    image: mumble:latest
+    ports:
+      - "64738"
+      - "64738/udp"
+    volumes:
+      - mumble-data:/etc/mumble/data
+    restart: unless-stopped
+    network_mode: "host"
+
+volumes:
+  mumble-data:
+    name: mumble-data
